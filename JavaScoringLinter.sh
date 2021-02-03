@@ -7,13 +7,13 @@ then
         echo -e "\n[INFO] ...Running Java linting for Score=$NOTE\n"
         cd ..
         mvn verify
-        cd helper
+        cd JavaScoringLinter
         INSTRUCTION=$(sh getInstructions.sh)
         python -c "print(round($INSTRUCTION*(1-$NOTE/10)/8))" > maxAllowedViolation
         echo -e "\n[INFO]  maxAllowedViolation=$(cat maxAllowedViolation)\n\n"
         cd ..
-        echo -e "[INFO]  mvn checkstyle:check -D checkstyle.maxAllowedViolations=$(cat helper/maxAllowedViolation) -D checkstyle.config.location=google_checks.xml -D checkstyle.violationSeverity=warning"
-        mvn checkstyle:check -D checkstyle.maxAllowedViolations=$(cat helper/maxAllowedViolation) -D checkstyle.config.location=google_checks.xml -D checkstyle.violationSeverity=warning
+        echo -e "[INFO]  mvn checkstyle:check -D checkstyle.maxAllowedViolations=$(cat JavaScoringLinter/maxAllowedViolation) -D checkstyle.config.location=google_checks.xml -D checkstyle.violationSeverity=warning"
+        mvn checkstyle:check -D checkstyle.maxAllowedViolations=$(cat JavaScoringLinter/maxAllowedViolation) -D checkstyle.config.location=google_checks.xml -D checkstyle.violationSeverity=warning
     else 
         echo -e "[ERROR] Invalid value for parameter Score.  (must be float in [0.0,10.0])"    
     fi
