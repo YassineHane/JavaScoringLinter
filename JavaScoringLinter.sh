@@ -4,7 +4,7 @@ then
     NOTE=$(echo "$@" | cut -f2 -d=)
     if [[ $NOTE =~ (^[0-9]([.][0-9]*)?$|^10$) ]]
         then
-        echo -e "\n[INFO] ...Running Java linting for Score=$(tput setaf 6)$NOTE\n"
+        echo -e "\n[INFO] ...Running Java linting for Score=$NOTE\n"
         cd ..
         mvn verify
         cd helper
