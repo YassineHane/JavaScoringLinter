@@ -9,7 +9,7 @@ then
         mvn verify
         cd JavaScoringLinter
         INSTRUCTION=$(sh getInstructions.sh)
-        python -c "print(round($INSTRUCTION*(1-$NOTE/10)/8))" > maxAllowedViolation
+        echo $(java -jar lintingformula.jar $NOTE $INSTRUCTION) > maxAllowedViolation
         echo -e "\n[INFO]  maxAllowedViolation=$(cat maxAllowedViolation)\n\n"
         cd ..
         echo -e "[INFO]  mvn checkstyle:check -D checkstyle.maxAllowedViolations=$(cat JavaScoringLinter/maxAllowedViolation) -D checkstyle.config.location=google_checks.xml -D checkstyle.violationSeverity=warning"
